@@ -9,8 +9,8 @@ const logger = winston.createLogger({
     // - Write all logs error (and below) to `error.log`.
     //
     new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
 });
 
 //
@@ -18,15 +18,17 @@ const logger = winston.createLogger({
 // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
 //
 if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.simple(),
-  }));
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple()
+    })
+  );
 }
 
 logger.stream = {
-  write: (message) => {
+  write: message => {
     logger.info(message.trim());
-  },
+  }
 };
 
 module.exports = logger;

@@ -6,7 +6,7 @@ const { mongo, env } = require('./vars');
 mongoose.Promise = Promise;
 
 // Exit application on error
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on('error', err => {
   logger.error(`MongoDB connection error: ${err}`);
   process.exit(-1);
 });
@@ -17,15 +17,15 @@ if (env === 'development') {
 }
 
 /**
-* Connect to mongo db
-*
-* @returns {object} Mongoose connection
-* @public
-*/
+ * Connect to mongo db
+ *
+ * @returns {object} Mongoose connection
+ * @public
+ */
 exports.connect = () => {
   mongoose.connect(mongo.uri, {
     keepAlive: 1,
-    useNewUrlParser: true,
+    useNewUrlParser: true
   });
   return mongoose.connection;
 };
